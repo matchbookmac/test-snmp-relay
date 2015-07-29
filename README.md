@@ -17,6 +17,23 @@ touch snmp.conf
 echo "persistentDir /Users/Guest/Desktop/.snmp_persist" > snmp.conf
 ```
 
+clone the snmpjs repo from git.
+
+Change
+```javascript
+"bunyan": "~0.1.8",
+```
+to
+```javascript
+"bunyan": "^1.3.5",
+```
+inside of the `package.json` file
+
+Install snmpjs via npm using the local repo. Substitute the folder for wherever you save the snmpjs repo.
+```console
+npm install --save ../node-snmpjs/
+```
+
 start node server
 ```console
 node index.js
