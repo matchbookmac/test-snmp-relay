@@ -1,0 +1,19 @@
+{
+  "name": "test-snmp-relay",
+  "version": "0.0.1",
+  "description": "Test server for receiving SNMP",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "snmp"
+  ],
+  "author": "Ian and Bob",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.1",
+    "snmpjs": "file:../node-snmpjs"
+  }
+}
