@@ -19,15 +19,25 @@ echo "persistentDir /Users/Guest/Desktop/.snmp_persist" > snmp.conf
 
 clone the snmpjs repo from git.
 
-Change
+inside of the `package.json` file change
+
 ```javascript
-"bunyan": "~0.1.8",
+"dependencies": {
+  "jison": "0.3",
+  "asn1": "~0.2.2",
+  "bunyan": "0.1.something",
+  "dtrace-provider": "~0.4"
+},
 ```
 to
 ```javascript
-"bunyan": "^1.3.5",
+"dependencies": {
+  "jison": "0.3",
+  "asn1": "~0.2.2",
+  "bunyan": "^1.3.5",
+  "dtrace-provider": "~0.4"
+},
 ```
-inside of the `package.json` file
 
 Install snmpjs via npm using the local repo. Substitute the folder for wherever you save the snmpjs repo.
 ```console
