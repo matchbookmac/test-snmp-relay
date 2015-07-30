@@ -12,15 +12,12 @@ var
 ;
 
 trapd.on('trap', function (msg) {
+
   // Find the message from the trap
-  var trapValue = util.inspect(
-    snmp.message
-        .serializer(msg)['pdu']
-        .varbinds[0]
-        .string_value,
-    false,
-    null
-  );
+  var
+    trapData = snmp.message.serializer(msg)['pdu'],
+    trapValue = trapData.varbinds[0].string_value
+  ;
 
   // Push trap to ongoing result count, and current message to message array
   result.push(msg);
@@ -29,16 +26,30 @@ trapd.on('trap', function (msg) {
   // Create postData for http POST
   var postData = JSON.stringify({
     count: result.length,
-    message: messages[result.length - 1]
+    message: messages[result.length - 1],
+    status: trapData.specific_trap === 18
   });
 
   // Log trap data
   var now = new Date();
   console.log("\n\n-------- \nTrap Received " + now);
   console.log("Trap Value: " + trapValue);
+  console.log("Trap ID: " + trapData.specific_trap);
   console.log("Total Traps Received: " + result.length + "\n");
 
   // Create POST request to external server
+  // var options = {
+  //   hostname: "192.168.1.182",
+  //   port: 3002,
+  //   path: "/incoming-snmp",
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     "Content-Length": postData.length
+  //   }
+  // };
+
+  // Create POST request to internal server
   var options = {
     hostname: "localhost",
     port: 3002,
@@ -46,6 +57,7 @@ trapd.on('trap', function (msg) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Content-Length": postData.length
     }
   };
 
