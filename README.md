@@ -16,9 +16,16 @@ GNU General Public License, version 3. Copyright (c) 2015 Ian C. MacDonald & Bob
 4. Start Node app
 5. Send/receive signals
 
+##### Notes
+
+These instructions are for setting up development on OSX 10.10.2, YMMV on other systems
+
 ### 1: SNMP ('Simple' Network Management Protocol) setup
 
-To get snmp trap sending to work:
+If you don't already have it, install `net-snmp`
+```console
+brew install net-snmp
+```
 
 Clone the repo below into your root directory to get our setup:
 ```console
@@ -118,6 +125,7 @@ nmp install
 
 ```
 Or, if you just need to install snmpjs:
+
 Install snmpjs via npm using the local repo. Substitute the folder for wherever you save the snmpjs repo.
 
 ```console
@@ -127,7 +135,9 @@ npm install --save ../node-snmpjs/
 ### 3: Setup external server
 
 Create a server to receive the POST requests from this relay.
+
 Alternatively, you can just use the one we made:
+
 ```console
 git clone https://github.com/matchbookmac/test-snmp-api.git
 ```
@@ -144,11 +154,13 @@ node index.js
 #### Signals to Local server
 
 send UP trap with:
+
 ```console
 snmptrap -v 1 -m +UP-BRIDGE-MIB -c public localhost:3000 UP-BRIDGE-MIB::demotraps localhost 6 18 '' SNMPv2-MIB::sysLocation.0 s "UP signal"
 ```
 
 send DOWN trap with:
+
 ```console
 snmptrap -v 1 -m +DOWN-BRIDGE-MIB -c public localhost:3000 DOWN-BRIDGE-MIB::demotraps localhost 6 19 '' SNMPv2-MIB::sysLocation.0 s "DOWN signal"
 ```
@@ -158,7 +170,7 @@ snmptrap -v 1 -m +DOWN-BRIDGE-MIB -c public localhost:3000 DOWN-BRIDGE-MIB::demo
 If you have the listener setup on an external server that has a port open to the web, you can send a trap to that server by substituting `localhost` after `-c public` with the IP address or server name.
 
 A good way to do this for testing is to install ngrok and open the port to the web:
-Mac:
+
 ```console
 brew install ngrok
 ngrok 3000
