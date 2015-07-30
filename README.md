@@ -6,7 +6,7 @@
 
 @ Epicodus Programming School, Portland, OR
 
-GNU General Public License, version 3 (see below). Copyright (c) 2015 Ian C. MacDonald & Bob Ellis.
+GNU General Public License, version 3. Copyright (c) 2015 Ian C. MacDonald & Bob Ellis.
 
 ## Steps
 1. Setup SNMP locally
